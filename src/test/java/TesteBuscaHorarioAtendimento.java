@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -7,11 +8,17 @@ import static org.junit.Assert.assertTrue;
 
 public class TesteBuscaHorarioAtendimento {
 
+    private ProfessorService service;
+    private  BuscaHorarioAtendimento buscaHorarioAtendimento;
+
+    @Before
+    public void setUp(){
+        service = new MockProfessorService();
+        buscaHorarioAtendimento = new BuscaHorarioAtendimento(service);
+    }
+
     @Test
     public void testeBuscaHorarioProfessorRenzo(){
-        ProfessorService service = new MockProfessorService();
-        BuscaHorarioAtendimento buscaHorarioAtendimento = new BuscaHorarioAtendimento(service);
-
         Professor professor = buscaHorarioAtendimento.buscaHorarioAtendimento("Renzo");
 
         assertEquals("Renzo", professor.getNome_do_professor());
