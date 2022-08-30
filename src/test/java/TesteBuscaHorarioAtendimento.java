@@ -3,8 +3,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TesteBuscaHorarioAtendimento {
 
@@ -64,7 +63,7 @@ public class TesteBuscaHorarioAtendimento {
             testeHorario = false;
         }
 
-        assertEquals(true, testeHorario);
+        assertTrue(testeHorario);
     }
 
     @Test
@@ -74,7 +73,7 @@ public class TesteBuscaHorarioAtendimento {
 
         Boolean professorNaLista = buscaHorarioAtendimento.verificaProfessorNaLista("Guaracy");
 
-        assertEquals(true, professorNaLista);
+        assertFalse(professorNaLista);
     }
 
     @Test
@@ -84,7 +83,7 @@ public class TesteBuscaHorarioAtendimento {
 
         Professor professor = buscaHorarioAtendimento.buscaHorarioAtendimento("Marcelo");
 
-        assertEquals("noturno", professor.getIntegral_ou_noturno());
+        assertFalse(professor.getIntegral_ou_noturno().equals("noturno"));
     }
 
     @Test
@@ -95,11 +94,17 @@ public class TesteBuscaHorarioAtendimento {
 
         ArrayList<String> professores = buscaHorarioAtendimento.buscaListaProfessores();
 
+        boolean verificaTodosProfessoresHorarioIntegral = true;
 
         for(String professor : professores){
             Professor p = buscaHorarioAtendimento.buscaHorarioAtendimento(professor);
-            assertEquals("integral", p.getIntegral_ou_noturno());
+            if(p.getIntegral_ou_noturno().equals("noturno")){
+                verificaTodosProfessoresHorarioIntegral = false;
+            }
         }
+
+        assertFalse(verificaTodosProfessoresHorarioIntegral);
+
     }
 
 
